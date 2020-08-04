@@ -18,6 +18,29 @@
 
 function createBookList(books) {
   // your code goes in here, return the ul element
+  let bookList = document.createElement('ul');
+  bookList.style.listStyle = 'none';
+  bookList.style.display = 'flex';
+  bookList.style.justifyContent = 'flex-start';
+  bookList.style.flexWrap = 'wrap';
+  for (let book of books) {
+      let bookListItem = document.createElement('li');
+      let bookName = document.createElement('p');
+      bookName.innerText = book.title + ' - ' + book.author;
+      bookListItem.appendChild(bookName);
+      let bookImage = document.createElement('img');
+      bookImage.src = book.title + '.jpg';
+      bookListItem.appendChild(bookImage);
+      bookList.appendChild(bookListItem);
+      if (book.alreadyRead) {bookListItem.style.background = 'green';} else {
+        bookListItem.style.background = 'red';
+      }
+      bookListItem.style.width = '350px';
+      bookListItem.style.margin = '20px';
+      bookListItem.style.padding = '10px';
+  }
+
+  return bookList;
 }
 
 const books = [{
