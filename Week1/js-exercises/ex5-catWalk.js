@@ -11,3 +11,27 @@
  6. When the cat reaches the middle of the screen, replace the img with an image of a cat dancing(use this URL: https: //tenor.com/StFI.gif), keep it dancing for 5 seconds, and then replace the img with the original image and have it continue the walk.
  
 */
+let cat = document.querySelector('img');
+cat.style.left = '0px';
+let isPaused = false;
+
+function catWalk() {
+    if (!isPaused) {
+        cat.style.left = (parseInt(cat.style.left) + 10).toString() + 'px';
+        if (parseInt(cat.style.left) >= window.innerWidth ) cat.style.left = '0px';
+        if (parseInt(cat.style.left) === Math.floor(window.innerWidth / 20) * 10 - 180) {
+            cat.src = 'tenor.gif';
+            isPaused = true;
+            setTimeout(() => {
+                cat.src = 'http://www.anniemation.com/clip_art/images/cat-walk.gif';
+                isPaused = false;
+            }, 5000);
+            
+        }
+    }
+    
+}
+
+setInterval(catWalk, 50);
+
+
