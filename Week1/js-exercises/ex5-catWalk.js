@@ -17,8 +17,8 @@ let isPaused = false;
 
 function catWalk() {
     if (!isPaused) {
-        cat.style.left = (parseInt(cat.style.left) + 10).toString() + 'px';
-        if (parseInt(cat.style.left) >= window.innerWidth ) cat.style.left = '0px';
+        cat.style.left = (parseInt(cat.style.left) + 10) + 'px';
+        if (parseInt(cat.style.left) >= window.innerWidth) cat.style.left = '0px';
         if (parseInt(cat.style.left) === Math.floor(window.innerWidth / 20) * 10 - 180) {
             cat.src = 'tenor.gif';
             isPaused = true;
@@ -26,7 +26,6 @@ function catWalk() {
                 cat.src = 'http://www.anniemation.com/clip_art/images/cat-walk.gif';
                 isPaused = false;
             }, 5000);
-            
         }
     }
     
