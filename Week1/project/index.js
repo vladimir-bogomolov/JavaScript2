@@ -1,6 +1,6 @@
 // your code goes in here
 function getQuote() {
-    let quotes = [{
+    const quotes = [{
         author: 'Oscar Wilde',
         quote: 'Be yourself, everyone else is already taken.'
     }, 
@@ -25,11 +25,17 @@ function getQuote() {
         quote: 'It is never too late to be what you might have been.'
     }];
 
-    let currentQuote = quotes[Math.floor(Math.random() * quotes.length)];
+    var currentQuote = quotes[Math.floor(Math.random() * quotes.length)];
 
     document.getElementById('quote').innerHTML = '<i class="fas fa-quote-left"></i>' + currentQuote.quote;
     document.getElementById('author').innerHTML = '- ' + currentQuote.author;
 
 }
 
-document.getElementById('newQuote').addEventListener('click', getQuote);
+document.getElementById('newQuote').addEventListener('click', () => {
+    let currentQuote = document.getElementById('quote').innerText;
+    // In case two quotes are the same - repeat generation
+    while (currentQuote === document.getElementById('quote').innerText) {
+        getQuote();
+    }    
+});
