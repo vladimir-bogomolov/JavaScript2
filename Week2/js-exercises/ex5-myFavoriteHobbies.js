@@ -10,6 +10,14 @@
 
 function createHTMLList(arr) {
   // your code goes in here
+  const body = document.querySelector('body');
+  const list = document.createElement('ul');
+  myHobbies.forEach(hobby => {
+    const listItem = document.createElement('li');
+    listItem.innerText = hobby;
+    list.appendChild(listItem);
+  });
+  body.appendChild(list);
 }
 
 const myHobbies = [
@@ -19,3 +27,5 @@ const myHobbies = [
   'Hanging out with friends',
   'Going to the gym',
 ];
+
+createHTMLList(myHobbies);
