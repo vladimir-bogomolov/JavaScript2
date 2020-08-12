@@ -8,12 +8,14 @@
 
  */
 function doubleEvenNumbers(numbers) {
-  const newNumbers = [];
-  for (let i = 0; i < numbers.length; i++) {
-    if (numbers[i] % 2 === 0) {
-      newNumbers.push(numbers[i] * 2);
-    }
-  }
+  // const newNumbers = [];
+  // for (let i = 0; i < numbers.length; i++) {
+  //   if (numbers[i] % 2 === 0) {
+  //     newNumbers.push(numbers[i] * 2);
+  //   }
+  // }
+  // return newNumbers;
+  const newNumbers  = numbers.filter(num => num % 2 === 0).map(num => num *2);
   return newNumbers;
 }
 
