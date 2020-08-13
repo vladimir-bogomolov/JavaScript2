@@ -8,4 +8,57 @@
   If the timer finishes the timer should be replaced by the message: Time 's up!
  * 
  */
+ const inputInterval = document.getElementById('inputTime');
+ const minutes = document.getElementById('minutes');
+ const seconds = document.getElementById('seconds');
+ const intervalDown = document.querySelector('.fa-arrow-down');
+ const intervalUp = document.querySelector('.fa-arrow-up');
+ const playBtn = document.querySelector('.fa-play');
+ const pauseBtn = document.querySelector('.fa-pause');
+ //duration in seconds
+ let duration = 1500;
+ let startTime;
+
+
  
+ 
+ function getInterval() {
+    let userInput = parseInt(inputInterval.innerText);
+    if (userInput >= 1) {
+      intervalDown.classList.remove('hover');
+      duration = parseInt(inputInterval.innerText) * 60;
+      minutes.innerText = inputInterval.innerText;
+      seconds.innerText = '00';
+    } else {
+      intervalDown.classList.add('hover');
+      inputInterval.innerText = '1';
+      duration = 60;
+      minutes.innerText = '1';
+      seconds.innerText = '00';
+    }
+ }
+ 
+function startTimer() {
+  let secGone = Math.round((Date.now() - startTime) / 1000);
+  let secToEnd = duration - secGone;
+  console.log(secToEnd);
+  if (secGone <= duration) {
+    minutes.innerText = Math.floor(parseInt(secToEnd) / 60);
+    seconds.innerText = parseInt(secToEnd) % 60;
+  }
+}
+
+
+intervalDown.addEventListener('click', e => {
+  inputInterval.innerText = parseInt(inputInterval.innerText) - 1;
+  getInterval();
+});
+intervalUp.addEventListener('click', e => {
+  inputInterval.innerText = parseInt(inputInterval.innerText) + 1;
+  getInterval();
+});
+playBtn.addEventListener('click', e => {
+  startTime = Date.now();
+  setInterval(startTimer, 1000);
+});
+

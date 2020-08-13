@@ -63,9 +63,17 @@ h3 {
     margin: 0 1rem;
 }
 
-i:hover {
+i:hover, .hover {
     color: #14353A;
     cursor: pointer;
+}
+
+.fa-stop {
+    display: none;
+}
+
+.hover {
+    color: #14353A;
 }
 
 @media(max-width:550px) {
