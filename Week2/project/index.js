@@ -17,6 +17,7 @@
  const playBtn = document.querySelector('.fa-play');
  const pauseBtn = document.querySelector('.fa-pause');
  const stopBtn = document.querySelector('.fa-stop');
+ const buttons = document.querySelectorAll('i');
 
  //duration in seconds
  let duration = 1500;
@@ -25,9 +26,6 @@
  let secToEnd;
  let timer;
  let status = 'clear';
-
-
- 
  
  function getInterval() {
     let userInput = parseInt(inputInterval.innerText);
@@ -79,28 +77,32 @@ function timeUp() {
   status = 'finished';
 }
 
+function reset(e) {
+  clearInterval(timer);
+  intervalDown.classList.remove('hover');
+  intervalUp.classList.remove('hover');
+  pauseBtn.classList.remove('hover');
+  playBtn.style.display = 'inline';
+  stopBtn.style.display = 'none';
+  status = 'clear';
+  minutes.style.display = 'inline';
+  seconds.style.display = 'inline';
+  column.innerText = ':';
+  getInterval();
+}
+
 
 intervalDown.addEventListener('click', checkArrows);
 intervalUp.addEventListener('click', checkArrows);
 playBtn.addEventListener('click', e => {
   startTime = Date.now();
   timer = setInterval(startTimer, 1000);
-  // timer;
   playBtn.style.display = 'none';
   stopBtn.style.display = 'inline';
   pauseBtn.classList.remove('hover');
 });
 stopBtn.addEventListener('click', e => {
-  clearInterval(timer);
-  minutes.style.display = 'inline';
-  seconds.style.display = 'inline';
-  column.innerText = ':';
-  playBtn.style.display = 'inline';
-  stopBtn.style.display = 'none';
-  status = 'clear';
-  intervalDown.classList.remove('hover');
-  intervalUp.classList.remove('hover');
-  getInterval();
+  reset();
 })
 pauseBtn.addEventListener('click', e => {
   if (status === 'timer') {
@@ -114,3 +116,9 @@ pauseBtn.addEventListener('click', e => {
     pauseBtn.classList.add('hover');
   }
 })
+
+buttons.forEach(button => button.addEventListener('click', e => {
+  if (status === 'finished') {
+    reset();
+  }
+}));
