@@ -11,13 +11,20 @@
  const inputInterval = document.getElementById('inputTime');
  const minutes = document.getElementById('minutes');
  const seconds = document.getElementById('seconds');
+ const column = document.getElementById('column');
  const intervalDown = document.querySelector('.fa-arrow-down');
  const intervalUp = document.querySelector('.fa-arrow-up');
  const playBtn = document.querySelector('.fa-play');
  const pauseBtn = document.querySelector('.fa-pause');
+ const stopBtn = document.querySelector('.fa-stop');
+
  //duration in seconds
  let duration = 1500;
+ // global vars for timer
  let startTime;
+ let secToEnd;
+ let timer;
+ let status = 'clear';
 
 
  
@@ -37,28 +44,73 @@
       seconds.innerText = '00';
     }
  }
+
+ function checkArrows(e) {
+   if (status === 'clear') {
+     if (e.target === intervalDown) {
+      inputInterval.innerText = parseInt(inputInterval.innerText) - 1;
+     } else {
+      inputInterval.innerText = parseInt(inputInterval.innerText) + 1;
+     }
+     getInterval();
+   } else {
+    intervalDown.classList.add('hover');
+    intervalUp.classList.add('hover');
+   }
+ }
  
 function startTimer() {
+  status = 'timer';
   let secGone = Math.round((Date.now() - startTime) / 1000);
-  let secToEnd = duration - secGone;
-  console.log(secToEnd);
-  if (secGone <= duration) {
+  secToEnd = duration - secGone;
+  if (secGone < duration) {
     minutes.innerText = Math.floor(parseInt(secToEnd) / 60);
-    seconds.innerText = parseInt(secToEnd) % 60;
+    let sec = parseInt(secToEnd) % 60;
+    seconds.innerText = (sec.toString().length < 2 ? '0':'') + sec;
+  } else {
+    timeUp();
   }
 }
 
+function timeUp() {
+  minutes.style.display = 'none';
+  seconds.style.display = 'none';
+  column.innerText = 'Time\'s up!';
+  status = 'finished';
+}
 
-intervalDown.addEventListener('click', e => {
-  inputInterval.innerText = parseInt(inputInterval.innerText) - 1;
-  getInterval();
-});
-intervalUp.addEventListener('click', e => {
-  inputInterval.innerText = parseInt(inputInterval.innerText) + 1;
-  getInterval();
-});
+
+intervalDown.addEventListener('click', checkArrows);
+intervalUp.addEventListener('click', checkArrows);
 playBtn.addEventListener('click', e => {
   startTime = Date.now();
-  setInterval(startTimer, 1000);
+  timer = setInterval(startTimer, 1000);
+  // timer;
+  playBtn.style.display = 'none';
+  stopBtn.style.display = 'inline';
+  pauseBtn.classList.remove('hover');
 });
-
+stopBtn.addEventListener('click', e => {
+  clearInterval(timer);
+  minutes.style.display = 'inline';
+  seconds.style.display = 'inline';
+  column.innerText = ':';
+  playBtn.style.display = 'inline';
+  stopBtn.style.display = 'none';
+  status = 'clear';
+  intervalDown.classList.remove('hover');
+  intervalUp.classList.remove('hover');
+  getInterval();
+})
+pauseBtn.addEventListener('click', e => {
+  if (status === 'timer') {
+    clearInterval(timer);
+    duration = secToEnd;
+    pauseBtn.classList.add('hover');
+    playBtn.style.display = 'inline';
+    stopBtn.style.display = 'none';
+    status = 'paused';
+  } else {
+    pauseBtn.classList.add('hover');
+  }
+})
