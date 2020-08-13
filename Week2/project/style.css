@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Red+Rose:wght@700&display=swap');
+
+html {
+    font-family: 'Red Rose', cursive;
+    background-color: #1F555D;
+    color: white;
+    font-size: 24px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+#app {
+    height: 70%;
+    width: 70%;
+    margin: 10% auto;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.input {
+    display: flex;
+    justify-content: center;
+    font-size: 1.3rem;
+}
+
+#inputTime {
+    margin: 0 1rem;
+}
+
+.timer {
+    width: 60%;
+    height: 70%;
+    margin: 1rem auto;
+    border-radius: 1rem;
+    border: 0.5rem solid #14353A;
+    padding: 1rem;
+}
+
+.timerDisplay {
+    display: flex;
+    justify-content: center;
+    font-size: 2rem;
+}
+
+.buttons {
+    font-size: 1.3rem;
+}
+
+.buttons i {
+    margin: 0 1rem;
+}
+
+i:hover {
+    color: #14353A;
+    cursor: pointer;
+}
+
+@media(max-width:550px) {
+    html {
+        font-size: 14px;
+    }
+}
+
+@media(max-width:350px) {
+    #app {
+        width: 90%;
+    }
+    .timer {
+        width: 100%;
+    }
+}
+
