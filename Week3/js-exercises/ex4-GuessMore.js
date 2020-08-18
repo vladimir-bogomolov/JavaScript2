@@ -15,7 +15,7 @@ function f1(val) {
   return val;
 }
 f1(x);
-console.log(x);
+console.log(x); // 9 Because we didn't cahnge value of x. When we refers to simple variable (num, boolean, string) we refers to the value
 
 const y = {
   x: 9
@@ -26,4 +26,8 @@ function f2(val) {
   return val;
 }
 f2(y);
-console.log(y);
+console.log(y); // 10 Because we changed value at memory location of object "y". When we refers to objects or arrays, we refers to the location in memory. 
+
+
+//Source: http://adripofjavascript.com/blog/drips/object-equality-in-javascript.html
+// This article is about comparing, but it's the same logic when we put variable in function - there are different approach how to reffer to simple and complex variables.
