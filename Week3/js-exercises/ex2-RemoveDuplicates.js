@@ -22,6 +22,7 @@ function removeDuplicates(arr) {
       i--;
     }
   }
+  return 'I see incorrect statement in the line 32. We can not compare arrays this way';
 }
 
 const letters = ['a', 'b', 'c', 'd', 'a', 'e', 'f', 'c', 'b'];
