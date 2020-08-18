@@ -19,3 +19,5 @@ const x = (function () {
 })();
 
 x();
+
+// a = 12 because we changed value of global variable "a" at line 15, then used it
